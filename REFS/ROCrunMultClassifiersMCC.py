@@ -75,14 +75,14 @@ def runFeatureReduce() :
 	# list of classifiers, selected on the basis of our previous paper "
 	classifierList = [
 		
-			[GradientBoostingClassifier(n_estimators=300), "GradientBoostingClassifier(n_estimators=300)"],
-			[RandomForestClassifier(n_estimators=300), "RandomForestClassifier(n_estimators=300)"],
-			[LogisticRegression(), "LogisticRegression"],
-			[PassiveAggressiveClassifier(),"PassiveAggressiveClassifier"],
-			[SGDClassifier(), "SGDClassifier"],
-			[SVC(kernel='linear'), "SVC(linear)"],
-			[RidgeClassifier(), "RidgeClassifier"],
-			[BaggingClassifier(n_estimators=300), "BaggingClassifier(n_estimators=300)"],
+			# [GradientBoostingClassifier(n_estimators=300), "GradientBoostingClassifier(n_estimators=300)"],
+			# [RandomForestClassifier(n_estimators=300), "RandomForestClassifier(n_estimators=300)"],
+			# [LogisticRegression(), "LogisticRegression"],
+			# [PassiveAggressiveClassifier(),"PassiveAggressiveClassifier"],
+			# [SGDClassifier(), "SGDClassifier"],
+			# [SVC(kernel='linear'), "SVC(linear)"],
+			# [RidgeClassifier(), "RidgeClassifier"],
+			# [BaggingClassifier(n_estimators=300), "BaggingClassifier(n_estimators=300)"],
 			
 			[AdaBoostClassifier(n_estimators=300), "AdaBoostClassifier(n_estimators=300)"],
             [ExtraTreesClassifier(n_estimators=300), "ExtraTreesClassifier(n_estimators=300)"],
@@ -123,6 +123,7 @@ def runFeatureReduce() :
 		mccs = []
 		mean_fpr = np.linspace(0, 1, 100)
 		i = 0
+		j = 0
 		yTest=[]
 		yNew=[]
 	
@@ -179,8 +180,11 @@ def runFeatureReduce() :
 			scoreTest = classifier.score(X_test, y_test)
 			
 			y_new = classifier.predict(X_test)
+            
+			
 			for i in range(0, len(y_new)):
 				y_new[i]=round(y_new[i])
+                
 			
 			
 			fpr, tpr, thresholds = roc_curve(y_test, y_new)
@@ -193,8 +197,8 @@ def runFeatureReduce() :
 			mccs.append(mcc)
 			
 			ax1.plot(fpr, tpr, lw=1, alpha=0.3,
-					 label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
-
+					 label='ROC fold %d (AUC = %0.2f)' % (j, roc_auc))
+			j += 1
 			i += 1
 			
 				

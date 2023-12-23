@@ -121,6 +121,7 @@ def runFeatureReduce() :
 		aucs = []
 		mean_fpr = np.linspace(0, 1, 100)
 		i = 0
+		j = 0
 		yTest=[]
 		yNew=[]
 	
@@ -188,8 +189,8 @@ def runFeatureReduce() :
 			aucs.append(roc_auc)
 			
 			ax1.plot(fpr, tpr, lw=1, alpha=0.3,
-					 label='ROC fold %d (AUC = %0.2f)' % (i, roc_auc))
-
+					 label='ROC fold %d (AUC = %0.2f)' % (j, roc_auc))
+			j += 1
 			i += 1
 			
 				
