@@ -51,7 +51,7 @@ from sklearn.preprocessing import MinMaxScaler
 # used for cross-validation
 from sklearn.model_selection import StratifiedKFold
 from sklearn.metrics import roc_curve, auc
-from scipy import interp
+from numpy import interp
 import matplotlib.pyplot as plt
 # this is an incredibly useful function
 from pandas import read_csv
@@ -105,7 +105,7 @@ def runFeatureReduce() :
 	
 	labels=np.max(y)+1
 	# prepare folds
-	skf = StratifiedKFold(n_splits=numberOfFolds, shuffle=True)
+	skf = StratifiedKFold(n_splits=numberOfFolds, shuffle=True, random_state=0)
 	indexes = [ (training, test) for training, test in skf.split(X, y) ]
 
 	
